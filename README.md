@@ -13,6 +13,15 @@
 ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
+## Table of contents
+## Usage
+## Contribute
+The project has a separate contribution file. Please adhere to the steps listed in the separate contributions [file](./CONTRIBUTING.md)
 
 ## Contact
-Email: nguyenvantuan140397@gmail.com
+You can reach me on [Linkedin](https://www.linkedin.com/in/tuanbacam/)
+
+## License
+[![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
+<hr>
+<hr>
