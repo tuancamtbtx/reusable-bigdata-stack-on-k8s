@@ -1,6 +1,0 @@
-apiVersion: demo.fabric8.io/v1alpha1
-kind: SparkApp
-metadata:
-  name: example-podset
-spec:
-  replicas: 5

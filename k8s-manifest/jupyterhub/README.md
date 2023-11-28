@@ -1,4 +1,4 @@
-## Install JupyterHub
+## Install JupyterHub With Helm Chart
 
 1. Make Helm aware of the JupyterHub Helm chart repository so you can install the JupyterHub chart from it without having to use a long URL name.
 ```
