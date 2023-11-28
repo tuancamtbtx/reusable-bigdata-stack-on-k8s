@@ -1,8 +1,6 @@
 # Test the Deploy Flink 
 
 
-![spark-on-k8s](https://blog.cellenza.com/wp-content/uploads/2022/06/Spark-Schema-3-2048x1126.png)
+## Flink Web UI
 
-## Spark-Submit/Spark Operator
-
-![spark-submit](https://blog.cellenza.com/wp-content/uploads/2022/06/Spark_submit-operator.jpg)
+![spark-submit](https://nightlies.apache.org/flink/flink-docs-master/fig/playground-webui.png)
