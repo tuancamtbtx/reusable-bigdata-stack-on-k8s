@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: flink-taskmanager
+  labels:
+    app: flink
+    component: taskmanager
+spec:
+  selector:
+    matchLabels:
+      app: flink
+      component: taskmanager
+  serviceName: flink-taskmanager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flink
+        component: taskmanager
+    spec:
+      containers:
+      - name: taskmanager
+        image: flokkr/flink
+        args:
+        - taskmanager.sh
+        - start-foreground
+        envFrom:
+        - configMapRef:
+            name: flink-config
+        volumeMounts:
+        - name: smoketest
+          mountPath: /opt/smoketest
+      volumes:
+      - name: smoketest
+        hostPath:
+          path: /home/elek/projects/flokkr/docker-flink/examples/smoketest

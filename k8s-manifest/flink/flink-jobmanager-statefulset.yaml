@@ -1,0 +1,37 @@
+
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: flink-jobmanager
+  labels:
+    app: flink
+    component: jobmanager
+spec:
+  selector:
+    matchLabels:
+      app: flink
+      component: jobmanager
+  serviceName: flink-jobmanager
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: flink
+        component: jobmanager
+    spec:
+      containers:
+      - name: jobmanager
+        image: flokkr/flink
+        args:
+        - jobmanager.sh
+        - start-foreground
+        envFrom:
+        - configMapRef:
+            name: flink-config
+        volumeMounts:
+        - name: smoketest
+          mountPath: /opt/smoketest
+      volumes:
+      - name: smoketest
+        hostPath:
+          path: /home/elek/projects/flokkr/docker-flink/examples/smoketest
