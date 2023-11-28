@@ -14,8 +14,17 @@
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 
 ## Table of contents
+- [Requirements](#requirements)
+- [Usage](#usage)
+- [Contributing](#contributing)
+- [Contact](#Contact)
+- [License](#license)
 ## Usage
-## Contribute
+### Helms
+
+### Docker
+
+## Contributing
 The project has a separate contribution file. Please adhere to the steps listed in the separate contributions [file](./CONTRIBUTING.md)
 
 ## Contact
@@ -23,5 +32,4 @@ You can reach me on [Linkedin](https://www.linkedin.com/in/tuanbacam/)
 
 ## License
 [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
-<hr>
 <hr>
