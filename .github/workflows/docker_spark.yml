@@ -44,7 +44,9 @@ jobs:
           else
             echo "ver=" >> "$GITHUB_OUTPUT"
           fi
-
+      - name: Move java code to Root
+        run: |
+            mv dockers/spark/* 
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
