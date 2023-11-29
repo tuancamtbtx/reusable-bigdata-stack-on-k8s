@@ -46,7 +46,7 @@ jobs:
           fi
       - name: Move java code to Root
         run: |
-            mv dockers/jupyterhub/* .
+            mv dockers/flink/* .
       - name: Build and push Docker image
         uses: docker/build-push-action@v3
         with:
