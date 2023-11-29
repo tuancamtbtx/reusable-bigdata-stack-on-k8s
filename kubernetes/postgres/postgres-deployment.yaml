@@ -1,7 +1,8 @@
 apiVersion: apps/v1 
 kind: Deployment 
 metadata: 
-  name: postgres 
+  name: postgres
+  namespace: airflow  
 spec: 
   replicas: 1 
   selector: 

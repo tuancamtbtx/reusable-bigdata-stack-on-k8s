@@ -1,7 +1,66 @@
 kind: Deployment 
 apiVersion: apps/v1 
 metadata: 
-  name: airflow 
-  namespace: "airflow"
+  name: airflow-webserver 
+  namespace: airflow
 spec:
-  imagePullSecrets: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: airflow
+      deploy: airflow
+      component: webserver
+  template:
+    metadata:
+      labels:
+        app: airflow
+        deploy: airflow
+        component: webserver
+    spec:
+      containers:
+        - name: airflow-webserver
+          image: apache/airflow:2.2.4
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
+              valueFrom:
+                secretKeyRef:
+                  name: airflow-config
+                  key: sql_alchemy_conn
+            - name: AIRFLOW__CORE__EXECUTOR
+              valueFrom:
+                secretKeyRef:
+                  name: airflow-config
+                  key: executor
+          # volumeMounts:
+          #   - name: airflow-dags
+          #     mountPath: /opt/airflow/dags
+          #   - name: airflow-logs
+          #     mountPath: /opt/airflow/logs
+          #   - name: airflow-config
+          #     mountPath: /opt/airflow/airflow.cfg
+          #     subPath: airflow.cfg
+          ports:
+            - containerPort: 8080
+          command: 
+            # - tini
+            # - --
+            # - sh 
+            # - -c
+            - airflow 
+          args:
+            - webserver
+    # restartPolicy: Always
+  # volumes:
+  #   - name: airflow-dags
+  #     persistentVolumeClaim:
+  #       claimName: airflow-dags-pvc
+  #   - name: airflow-logs
+  #     persistentVolumeClaim:
+  #       claimName: airflow-logs-pvc
+  #   - name: airflow-config
+  #     configMap:
+  #       name: airflow-config
+  #       items:
+  #         - key: airflow.cfg
+  #           path: airflow.cfg

@@ -1,9 +1,10 @@
 kind: PersistentVolume 
 apiVersion: v1 
 metadata: 
-  name: postgres-pv-volume 
+  name: postgres-pv-volume
+  namespace: airflow
   labels: 
-    type: local 
+    type: local
     app: postgres 
 spec: 
   storageClassName: manual 
@@ -17,7 +18,8 @@ spec:
 kind: PersistentVolumeClaim 
 apiVersion: v1 
 metadata: 
-  name: postgres-pv-claim 
+  name: postgres-pv-claim
+  namespace: airflow
   labels: 
     app: postgres 
 spec: 

@@ -1,0 +1,16 @@
+kind: Service 
+apiVersion: v1 
+metadata: 
+  name: webserver-svc 
+  namespace: airflow 
+spec: 
+  type: NodePort 
+  selector: 
+    deploy: airflow 
+    name: airflow 
+    component: webserver 
+  ports: 
+    - name: airflow-ui 
+      protocol: TCP 
+      port: 8080 
+      targetPort: 8080
