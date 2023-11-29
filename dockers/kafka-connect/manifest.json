@@ -1,0 +1,29 @@
+{
+  "name" : "kafka-connect-azure-data-lake-gen2-storage",
+  "version" : "1.6.18",
+  "title" : "Kafka Connect Azure Data Lake Storage Gen2",
+  "description" : "The Azure Data Lake Gen2 Sink Connector integrates <a href=\"https://docs.microsoft.com/en-us/azure/data-lake-store/data-lake-store-overview/\">Azure Data Lake Gen2</a> with Apache Kafka.\nThe connector can export data from Apache Kafka® topics to Azure Data Lake Gen2 files in either Avro or JSON formats.\nDepending on your environment, the Azure Data Lake Gen2 connector can export data by guaranteeing exactly-once delivery\nsemantics to consumers of the Azure Data Lake Gen2 files it produces.\n<p>The Azure Data Lake Gen2 sink connector periodically polls data from Kafka and in turn uploads it to Azure Data Lake Gen2.\nA partitioner is used to split the data of every Kafka partition into chunks.\nEach chunk of data is represented as an Azure Data Lake Gen2 file. The key name encodes the topic, Kafka partition, and\nstart offset of this data chunk. If no partitioner is specified in the configuration, a default partitioner is used that\npreserves Kafka partitioning. The size of each data chunk is determined by the number of records written to Azure Data Lake Gen2 and by schema compatibility.",
+  "owner" : {
+    "username" : "confluentinc",
+    "name" : "Confluent, Inc."
+  },
+  "support" : {
+    "summary" : "This connector is a Confluent Commercial Connector and <a href=\"https://www.confluent.io/subscription/\">supported by Confluent</a>. The <connector-name> requires purchase of a <a href=\"https://www.confluent.io/product/confluent-platform/\">Confluent Platform</a> subscription, including a license to this Commercial Connector. You can also use this connector for a 30-day trial without an enterprise license key - after 30 days, you need to purchase a subscription. Please contact your Confluent account manager for details."
+  },
+  "tags" : [ "file storage", "gen 2", "generation 2", "exactly once", "storage", "data lake", "azure", "Azure Data Lake Storage Gen2" ],
+  "features" : {
+    "supported_encodings" : [ "any" ],
+    "single_message_transforms" : true,
+    "confluent_control_center_integration" : true,
+    "kafka_connect_api" : true
+  },
+  "documentation_url" : "https://docs.confluent.io/kafka-connect-azure-data-lake-gen2-sink/current/index.html",
+  "source_url" : "https://github.com/confluentinc/kafka-connect-azure-blob-storage/kafka-connect-azure-data-lake-gen2-storage",
+  "docker_image" : { },
+  "license" : [ {
+    "name" : "Confluent Software Evaluation License",
+    "url" : "https://www.confluent.io/software-evaluation-license"
+  } ],
+  "component_types" : [ "sink" ],
+  "release_date" : "2023-10-28"
+}
