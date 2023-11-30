@@ -19,8 +19,8 @@ spec:
     spec:
       containers:
         - name: airflow-webserver
-          image: apache/airflow:2.2.4
-          imagePullPolicy: IfNotPresent
+          image: ghcr.io/tuancamtbtx/airflow:main
+          imagePullPolicy: Always
           env:
             - name: AIRFLOW__CORE__SQL_ALCHEMY_CONN
               valueFrom:
@@ -43,24 +43,22 @@ spec:
           ports:
             - containerPort: 8080
           command: 
-            # - tini
-            # - --
-            # - sh 
-            # - -c
-            - airflow 
-          args:
-            - webserver
-    # restartPolicy: Always
-  # volumes:
-  #   - name: airflow-dags
-  #     persistentVolumeClaim:
-  #       claimName: airflow-dags-pvc
-  #   - name: airflow-logs
-  #     persistentVolumeClaim:
-  #       claimName: airflow-logs-pvc
-  #   - name: airflow-config
-  #     configMap:
-  #       name: airflow-config
-  #       items:
-  #         - key: airflow.cfg
-  #           path: airflow.cfg
+            - tini
+            - --
+            - sh 
+            - -c
+            - airflow webserver
+      restartPolicy: Always
+      # volumes:
+      #   - name: airflow-dags
+      #     persistentVolumeClaim:
+      #       claimName: airflow-dags-pvc
+      #   - name: airflow-logs
+      #     persistentVolumeClaim:
+      #       claimName: airflow-logs-pvc
+      #   - name: airflow-config
+      #     configMap:
+      #       name: airflow-config
+      #       items:
+      #         - key: airflow.cfg
+      #           path: airflow.cfg

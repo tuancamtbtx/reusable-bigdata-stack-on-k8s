@@ -39,3 +39,4 @@ ENV AIRFLOW_HOME=/home/airflow/airflow
 
 RUN mkdir -p $AIRFLOW_HOME
 RUN chown airflow:airflow $AIRFLOW_HOME
+ENTRYPOINT ["tini", "--"]
