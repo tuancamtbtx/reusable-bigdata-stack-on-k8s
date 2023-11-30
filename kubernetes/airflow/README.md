@@ -1,22 +1,69 @@
-## Overview
-![overview](https://www.clearpeaks.com/wp-content/uploads/2022/08/1-Build-blocks.png)
+# Deploy Airflow on Kubernetes
 
-# Inside Airlock Config in productions
+This kustomize only apply for managing configmaps.
 
-## Airflow core: `airlock-configmap`
+### First setup
+**Init service account**
 
-- airflow.cfg: core airflow config
-- pod_template.yml: k8s pod template
-- webserver_config.py: airflow web extra settings (support oauth2)
-- gunicorn_config.py: addition settings to run airflow behind a proxy (nginx ingress)
-- team_conf.yaml: Setup repo for each team
+The service account is required to allow Airflow create pod for each task.
+
+```bash
+# choose your namespace first
+kubectl create namespace airflow
+# create the svc
+kubectl create clusterrolebinding sherlock --clusterrole=edit --serviceaccount=airflow:sherlock --namespace=airflow
+```
+
+**Add git credentials**
+```bash
+# in github, only PERSONAL ACCESS TOKEN (PAT) is work as expected (for multi repo setups)
+```
+
+**Setups secret**
+1. `airlock-secrets-env`
+```
+# airflow cores
+AIRFLOW__CORE__FERNET_KEY=
+AIRFLOW__CORE__SQL_ALCHEMY_CONN=mysql://...
+AIRFLOW__WEBSERVER__SECRET_KEY=
+AIRLOCK_MYSQL_URI=mysql://...
+```
+
+2. *git-creds*
+
+Secret for `git-sync`, works with `stash.tiki.com.vn`. Checkout tutorials https://github.com/kubernetes/git-sync/blob/release-3.x/docs/ssh.md
+TLDR;
+
+```
+ssh=
+known_hosts=
+```
 
 
-Some scripts & env:
-- ./core.yaml
-- ./contrib.yaml:
+### Setup configs
+**Always check changes first**
+```bash
+kustomize build ./ | kubectl diff -f - -n airflow
+```
 
+**Apply**
 
-## `airlock-config-env`
+```bash
+kustomize build ./ | kubectl apply -f - -n airflow
+```
 
-Expose some env
+### Extra things
+1. Loggings for running pod
+
+We use gcs as main logs store, but there's a drawback, that we only can see the logs after the task is done.
+
+A way to workaround is using NFS to store logs file.
+
+So we need a cron to cleanup these logs to reduce disk size.
+
+2. Metrics exporter
+We use statd-exproter to expose metrics from [airflow](https://airflow.apache.org/docs/apache-airflow/stable/logging-monitoring/metrics.html) to prometheus endpoint.
+
+After that k8s will automatic fetch those metrics.
+
+Checkout deployment at [./contrib/contrib.yaml](./contrib/contrib.yaml)

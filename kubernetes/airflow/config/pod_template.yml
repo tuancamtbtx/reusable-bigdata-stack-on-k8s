@@ -2,21 +2,8 @@ apiVersion: v1
 kind: Pod
 metadata:
   labels:
-    component: airlock-task
+    component: airflow-task
 spec:
-  affinity:
-    nodeAffinity:
-      requiredDuringSchedulingIgnoredDuringExecution:
-        nodeSelectorTerms:
-          - matchExpressions:
-              - key: tiki.dedicated
-                operator: In
-                values:
-                  - preempt-highmem
-              - key: topology.kubernetes.io/zone
-                operator: In
-                values:
-                  - asia-southeast1-c
   containers:
     - args: []
       command: []
@@ -26,9 +13,7 @@ spec:
         - name: AIRFLOW_HOME
           value: /home/airflow/airflow
         - name: AIRFLOW__CORE__DAGS_FOLDER
-          value: /airlock/dags
-        - name: GOOGLE_APPLICATION_CREDENTIALS
-          value: /.secrets/tiki-smartflow.json
+          value: /home/airflow/dags
         - name: IP
           valueFrom:
             fieldRef:
@@ -39,12 +24,12 @@ spec:
               fieldPath: metadata.name
       envFrom:
         - configMapRef:
-            name: airlock-config-env
+            name: airflow-config
         - secretRef:
-            name: airlock-secrets-env
+            name: airflow-secrets
         - secretRef:
-            name: airlock-secrets-env
-      image: "asia.gcr.io/tikivn/airlock:release"
+            name: airflow-secrets-env
+      image: "ghcr.io/tuancamtbtx/airflow:main"
       imagePullPolicy: IfNotPresent
       name: base
       resources:
@@ -55,7 +40,7 @@ spec:
           cpu: 200m
           memory: 200Mi
       volumeMounts:
-        - mountPath: /airlock/dags
+        - mountPath: /airflow/home/dags
           name: airflow-dags
           readOnly: false
           subPath: dags
@@ -80,16 +65,13 @@ spec:
   volumes:
     - name: airflow-dags
       persistentVolumeClaim:
-        claimName: airlock-dags
+        claimName: airflow-dags
     - name: airflow-logs
       persistentVolumeClaim:
-        claimName: airlock
+        claimName: airflow-logs
     - configMap:
         name: airlock-configmap
       name: airflow-config
-    - name: gcp-logs-creds
-      secret:
-        secretName: tiki-smartflow-gcp
   tolerations:
     - effect: NoSchedule
       key: dedicated

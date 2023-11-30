@@ -8,3 +8,4 @@ metadata:
 data: 
   sql_alchemy_conn: "postgresql://admin:test123.@postgres:5432/postgresdb"
   executor: "KubernetesExecutor"
+  airflow_home: /home/airflow/airflow
