@@ -19,11 +19,30 @@
 - [Contributing](#contributing)
 - [Contact](#Contact)
 - [License](#license)
-## Usage
-### Helms
+## Overview k8s
+![Alt text](./images/k8s.png)
 
-### Docker
-
+### Docker Publish
+1. Jupyterhub
+```
+docker pull ghcr.io/tuancamtbtx/jupyterhub:main
+```
+2. Airflow
+```
+docker pull ghcr.io/tuancamtbtx/airflow:main
+```
+3. Spark
+```
+docker pull ghcr.io/tuancamtbtx/spark:main
+```
+4. Flink
+```
+docker pull ghcr.io/tuancamtbtx/flink:main
+```
+5. Superset
+```
+docker pull ghcr.io/tuancamtbtx/superset:main
+```
 ## Contributing
 The project has a separate contribution file. Please adhere to the steps listed in the separate contributions [file](./CONTRIBUTING.md)
 
@@ -32,4 +51,7 @@ You can reach me on [Linkedin](https://www.linkedin.com/in/tuanbacam/)
 
 ## License
 [![Licence](https://img.shields.io/github/license/Ileriayo/markdown-badges?style=for-the-badge)](./LICENSE)
-<hr>
+
+## Reference:
+Overview of Kubernetes [alexxubyte](https://www.linkedin.com/in/alexxubyte)
+
