@@ -1,0 +1,5 @@
+## How NGINX Can Help
+`Connectivity Stack for Kubernetes` from NGINX helps you scale, observe, govern, and secure Kubernetes applications in any environment – on premises, in the cloud, and at the edge. It improves customer experience with reduced complexity, increased uptime, and detailed real-time visibility at scale. Connectivity Stack for Kubernetes combines these components:
+- `NGINX Ingress Controller` – Manage app connectivity at the edge of a Kubernetes cluster with API gateway, identity, and observability features
+- `NGINX Service Mesh` – Developer-friendly solution for service-to-service connectivity, security, orchestration, and observability
+- `NGINX App Protect` – (Optional) Modern app security that integrates seamlessly in DevOps environments as a robust WAF or app‑level DoS defense
